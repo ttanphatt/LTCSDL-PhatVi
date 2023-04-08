@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LTCSDL_QuanLyShop", "LTCSDL_QuanLyShop\LTCSDL_QuanLyShop.csproj", "{E74EBA4D-AA6E-446A-9F90-37F0D7EFCFCC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E74EBA4D-AA6E-446A-9F90-37F0D7EFCFCC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E74EBA4D-AA6E-446A-9F90-37F0D7EFCFCC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E74EBA4D-AA6E-446A-9F90-37F0D7EFCFCC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E74EBA4D-AA6E-446A-9F90-37F0D7EFCFCC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CC57B2BB-B2C6-4103-AAC9-F79F010B07DA}
+	EndGlobalSection
+EndGlobal
