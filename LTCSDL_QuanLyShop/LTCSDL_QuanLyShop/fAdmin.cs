@@ -18,6 +18,7 @@ namespace LTCSDL_QuanLyShop
         BUS_Account bAccount;
         BUS_KhachHang bKhachHang;
         BUS_PhieuNhap bPhieuNhap;
+        BUS_HoaDon bHoaDon;
         public fAdmin()
         {
             InitializeComponent();
@@ -26,6 +27,7 @@ namespace LTCSDL_QuanLyShop
             bAccount = new BUS_Account();
             bKhachHang = new BUS_KhachHang();
             bPhieuNhap = new BUS_PhieuNhap();
+            bHoaDon = new BUS_HoaDon();
         }
         public void HienThiSanPham()
         {
@@ -46,14 +48,6 @@ namespace LTCSDL_QuanLyShop
             dgvNhanVien.Columns[1].Width = (int)(dgvNhanVien.Width * 0.3);
             dgvNhanVien.Columns[2].Width = (int)(dgvNhanVien.Width * 0.3);
             dgvNhanVien.Columns[3].Width = (int)(dgvNhanVien.Width * 0.3);
-        }
-        public void HienThicbbNhanVien()
-        {
-            bNhanVien.HienThicbbNV(cbbNV);
-        }
-        public void HienThicbbNhaCungCap()
-        {
-            bSanPham.HienThicbbNCC(cbbNCC);
         }
         public void HienThiAccount()
         {
@@ -82,15 +76,54 @@ namespace LTCSDL_QuanLyShop
             dgvPhieuNhap.Columns[4].Width = (int)(dgvPhieuNhap.Width * 0.19);
             dgvPhieuNhap.Columns[5].Width = (int)(dgvPhieuNhap.Width * 0.19);
         }
-        private void fAdmin_Load(object sender, EventArgs e)
+        public void HienThiHoaDon()
+        {
+            dgvHoaDon.DataSource = null;
+            bHoaDon.HienThiDSHD(dgvHoaDon);
+        }
+        public void HienThicbbSanPham()
+        {
+            bSanPham.HienThicbbSP(cbbTimTenSP);
+        }
+        public void HienThicbbNhanVien()
+        {
+            bNhanVien.HienThicbbNV(cbbTimTenNV);
+        }
+        public void HienThicbbNhaCungCap()
+        {
+            bSanPham.HienThicbbNCC(cbbNCC);
+        }
+        public void HienThicbbPhieuNhap()
+        {
+            bPhieuNhap.HienThicbbPN(cbbTimTenPN);
+        }
+        public void HienThicbbAccount()
+        {
+            bAccount.HienThicbbAcc(cbbTimTK);
+        }
+        public void HienThicbbKhachHang()
+        {
+            bKhachHang.HienThicbbKH(cbbTimTeNKHHD);
+        }
+        public void HienThicbbHDKH()
+        {
+            bKhachHang.HienThicbbKH(cbbTimTeNKHHD);
+        }
+            private void fAdmin_Load(object sender, EventArgs e)
         {
             HienThiSanPham();
+            HienThicbbSanPham();
             HienThiNhanVien();
             HienThicbbNhanVien();
             HienThicbbNhaCungCap();
             HienThiAccount();
+            HienThicbbAccount();
             HienThiKhachHang();
             HienThiPhieuNhap();
+            HienThicbbPhieuNhap();
+            HienThiHoaDon();
+            HienThicbbKhachHang();
+            HienThicbbHDKH();
             txtTienNhap.Text =  "0";
         }
         // ==================== DGV CellClick   ===================
@@ -132,7 +165,6 @@ namespace LTCSDL_QuanLyShop
             {
                 txtIDKH.Text = dgvKhachHang.Rows[e.RowIndex].Cells[0].Value.ToString();
                 txtTenKH.Text = dgvKhachHang.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtSDTKhach.Text = dgvKhachHang.Rows[e.RowIndex].Cells[2].Value.ToString();
             }
         }
         private void dgvPhieuNhap_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -200,21 +232,20 @@ namespace LTCSDL_QuanLyShop
                 MessageBox.Show("Thêm account thất bại");
             }
         }
-        private void btThemKH_Click(object sender, EventArgs e)
-        {
-            KhachHang kh = new KhachHang();
-            kh.TenKH = txtTenKH.Text;
-            kh.SDT = int.Parse(txtSDTKhach.ToString());
-            if (bKhachHang.ThemKH(kh))
-            {
-                MessageBox.Show("Thêm khách hàng mới thành công");
-                bKhachHang.HienThiKH(dgvKhachHang);
-            }
-            else
-            {
-                MessageBox.Show("Thêm khách hàng thất bại");
-            }
-        }
+        //private void btThemKH_Click(object sender, EventArgs e)
+        //{
+        //    KhachHang kh = new KhachHang();
+        //    kh.TenKH = txtTenKH.Text;
+        //    if (bKhachHang.ThemKH(kh))
+        //    {
+        //        MessageBox.Show("Thêm khách hàng mới thành công");
+        //        bKhachHang.HienThiKH(dgvKhachHang);
+        //    }
+        //    else
+        //    {
+        //        MessageBox.Show("Thêm khách hàng thất bại");
+        //    }
+        //}
         private void btThemPN_Click(object sender, EventArgs e)
         {
             PhieuNhap pn = new PhieuNhap();
@@ -299,7 +330,6 @@ namespace LTCSDL_QuanLyShop
             KhachHang kh = new KhachHang();
             kh.IDKH = int.Parse(txtIDKH.Text);
             kh.TenKH = txtTenKH.Text;
-            kh.SDT = int.Parse(txtSDTKhach.ToString());
             if (bKhachHang.SuaKH(kh))
             {
                 MessageBox.Show("Sửa thông tin khách hàng thành công");
@@ -404,17 +434,87 @@ namespace LTCSDL_QuanLyShop
                 MessageBox.Show("Xóa phiếu nhập thất bại");
             }
         }
+        private void btnXoaHD_Click(object sender, EventArgs e)
+        {
+            HoaDon hd = new HoaDon();
+            int index = dgvHoaDon.CurrentCell.RowIndex;
+            hd.IDHD = int.Parse(dgvHoaDon.Rows[index].Cells[0].Value.ToString());
+            if(bHoaDon.XoaHD(hd))
+            {
+                MessageBox.Show("Xóa hóa đơn thành công");
+                bHoaDon.HienThiDSHD(dgvHoaDon);
+            }    
+            else
+            {
+                MessageBox.Show("Hóa đơn đã xóa rồi!!!");
+            }
+        }
         // =========   CHI TIẾT PHIẾU NHẬP   =============
-        
+
 
         private void dgvPhieuNhap_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             fChiTietPhieuNhap f = new fChiTietPhieuNhap();
             f.IDPN = int.Parse(dgvPhieuNhap.Rows[e.RowIndex].Cells[0].Value.ToString());
-            f.tongtien = double.Parse(dgvPhieuNhap.Rows[e.RowIndex].Cells[5].Value.ToString());
+            f.tongtien = double.Parse(dgvPhieuNhap.Rows[e.RowIndex].Cells["TongTien"].Value.ToString());
             f.ShowDialog();
         }
+        private void dgvHoaDon_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            fChiTietHoaDon f = new fChiTietHoaDon();
+            f.IDHD = int.Parse(dgvHoaDon.Rows[e.RowIndex].Cells["IDHD"].Value.ToString());
+            f.ShowDialog();
+        }
+        // ====================== TÌM KIẾM ========================
+        private void btnTimSP_Click(object sender, EventArgs e)
+        {
+            string ten = cbbTimTenSP.Text;
+            bSanPham.TimSP(ten, dgvSanPham);
+            cbbTimTenSP.Text = "";
+        }
 
-       
+        private void btnTimNV_Click(object sender, EventArgs e)
+        {
+            string ten = cbbTimTenNV.Text;
+            bNhanVien.TimNV(dgvNhanVien, ten);
+        }
+
+        private void btnTimACC_Click(object sender, EventArgs e)
+        {
+            string ten = cbbTimTK.Text;
+            bAccount.TimTK(dgvAccount, ten);
+        }
+
+        private void btTimKH_Click(object sender, EventArgs e)
+        {
+            string ten = txtTenKH.Text;
+            bKhachHang.TimKH(dgvKhachHang, ten);
+        }
+
+        private void btnTimPN_Click(object sender, EventArgs e)
+        {
+            string ten = cbbTimTenPN.Text;
+            bPhieuNhap.TimPN(dgvPhieuNhap, ten);
+            cbbTimTenPN.Text = "";
+        }
+
+        // ==================Xem danh sách=====================
+        private void btnXemPN_Click(object sender, EventArgs e)
+        {
+            HienThiPhieuNhap();
+        }
+        private void btnXemHD_Click(object sender, EventArgs e)
+        {
+            HienThiHoaDon();
+        }
+
+        private void btnTimHD_Click(object sender, EventArgs e)
+        {
+            int ma = int.Parse(cbbTimTeNKHHD.SelectedValue.ToString());
+            bHoaDon.TimHD(dgvHoaDon, ma);
+            cbbTimTenSP.Text = "";
+        }
+
+        
     }
 }

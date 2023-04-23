@@ -22,6 +22,5 @@ namespace LTCSDL_QuanLyShop
     
         public virtual PhieuNhap PhieuNhap { get; set; }
         public virtual SanPham SanPham { get; set; }
-        public object TenPN { get; internal set; }
     }
 }

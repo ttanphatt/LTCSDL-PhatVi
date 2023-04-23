@@ -76,11 +76,27 @@ namespace LTCSDL_QuanLyShop.DAO
             db.SaveChanges();
         }
 
+        public dynamic TimPN(string ten)
+        {
+            var ds = db.PhieuNhaps.Where(s => s.TenPN.Contains(ten)).
+                Select(s => new
+                {
+                    s.IDPN,
+                    s.TenPN,
+                    s.NgayNhap,
+                    s.TongTien,
+                    s.NhaCungCap.TenNCC,
+                    s.NhanVien.TenNV
+                }).ToList();
+            return ds;
+        }
+
         //  ============ CHI TIẾT PHIẾU NHẬP  ==============
         public dynamic HienThiChiTietPhieuNhap(int IDPN)
         {
             var ds = db.ChiTietPNs.Where(s=> s.IDPN == IDPN).Select(s => new
             {
+                s.IDCTPN,
                 s.PhieuNhap.IDPN,
                 s.SanPham.TenSP,
                 s.SoLuong,
@@ -93,6 +109,36 @@ namespace LTCSDL_QuanLyShop.DAO
             db.ChiTietPNs.Add(c);
             db.SaveChanges();
         }
+        public void XoaCTPN(ChiTietPN c)
+        {
+            ChiTietPN ct = db.ChiTietPNs.Find(c.IDCTPN);
+            db.ChiTietPNs.Remove(ct);
+            db.SaveChanges();
+        }
 
+
+        public bool CheckCTPN(ChiTietPN c)
+        {
+            ChiTietPN ct = db.ChiTietPNs.Find(c.IDCTPN);
+            if(ct != null)
+            {
+                return true;
+            }
+            return false;
+        }
+        public ChiTietPN LayCTPN(int ma)
+        {
+            ChiTietPN ct = db.ChiTietPNs.Where(s => s.IDCTPN == ma).FirstOrDefault();
+            return ct;
+        }
+        public void CatNhatCTPN(ChiTietPN p)
+        {
+            ChiTietPN ctpn = db.ChiTietPNs.Find(p.IDCTPN);
+            ctpn.IDCTPN = p.IDCTPN;
+            ctpn.IDSP = p.IDSP;
+            ctpn.SoLuong = p.SoLuong;
+            ctpn.DonGia = p.DonGia;
+            db.SaveChanges();
+        }
     }
 }

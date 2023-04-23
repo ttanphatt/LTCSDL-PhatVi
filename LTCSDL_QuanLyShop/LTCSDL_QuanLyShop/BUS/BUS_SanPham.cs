@@ -28,6 +28,20 @@ namespace LTCSDL_QuanLyShop.BUS
             cbb.DisplayMember = "TenSP";
             cbb.ValueMember = "IDSP";
         }
+        public List<SanPham> HienThiSPTXT(string ten)
+        {
+            return dSanPham.HienThitxtSP(ten);
+        }
+        public void HienThitxtSP(string ten)
+        {
+            dSanPham.HienThitxtSP(ten);
+        }
+        public SanPham HienThiSPTheoMa(int maSP)
+        {
+            return dSanPham.HienThiSPTheoMa(maSP);
+            
+        }
+
         public bool ThemSP(SanPham s)
         {
             try
@@ -79,6 +93,19 @@ namespace LTCSDL_QuanLyShop.BUS
             }
             else
                 return false;
+        }
+
+        public void TimSP(string ten, DataGridView dgv)
+        {
+            if(dSanPham.TimSP(ten).Count != 0)
+            {
+                MessageBox.Show("Tìm sản phẩm thành công");
+                dgv.DataSource = dSanPham.TimSP(ten);
+            }
+            else
+            {
+                MessageBox.Show("Tìm sản phẩm thất bại");
+            }    
         }
 
         //    NHÀ CUNG CẤP

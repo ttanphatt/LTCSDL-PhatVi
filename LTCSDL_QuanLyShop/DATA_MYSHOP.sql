@@ -58,6 +58,9 @@ CREATE TABLE KhachHang(
 	SDT int,
 )
 go
+ALTER TABLE KhachHang
+ALTER COLUMN SDT nvarchar(50);
+go
 
 CREATE TABLE HoaDon(
 	IDHD int Identity not null primary key,
@@ -89,6 +92,9 @@ CREATE TABLE ChiTietHoaDon (
 	FOREIGN KEY (IDHD) REFERENCES dbo.HoaDon(IDHD),
 )
 GO
+
+ALTER TABLE ChiTietHoaDon
+ADD TongTien datatype;
 -- Stored Procedure
 CREATE PROC SP_GetAccountByUsername
 @userName nvarchar(100),
@@ -101,10 +107,16 @@ BEGIN
 	Select @kq as KQ
 END
 GO
-
+create proc [dbo].[SP_GetID]
+@name nvarchar(50)
+as
+begin
+	select IDAcc from Account where TenTK=@name
+end
+GO
 /*----------*/
-set dateformat dmy
 
+create proc SP_GetHD
 --Nha Cung Cap
 insert into NhaCungCap values(N'Công ty may mặc A', 'Quan 1' ,0912121212)
 insert into NhaCungCap values(N'Công ty may mặc B', 'Quan 2' ,0934343434)

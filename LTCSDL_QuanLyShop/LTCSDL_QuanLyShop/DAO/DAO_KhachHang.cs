@@ -24,6 +24,11 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
+        public KhachHang HienThiThongTinKHTheoMa(int maKH)
+        {
+            KhachHang kh = db.KhachHangs.Where(s => s.IDKH == maKH).FirstOrDefault();
+            return kh;
+        }
         public void ThemKH(KhachHang k)
         {
             db.KhachHangs.Add(k);
@@ -63,5 +68,17 @@ namespace LTCSDL_QuanLyShop.DAO
             db.KhachHangs.Remove(kh);
             db.SaveChanges();
         }
+        public dynamic TimKH(string ten)
+        {
+            var ds = db.KhachHangs.Where(s => s.TenKH.Contains(ten)).
+                Select(s => new
+                {
+                    s.IDKH,
+                    s.TenKH,
+                    s.SDT
+                }).ToList();
+            return ds;
+        }
+
     }
 }

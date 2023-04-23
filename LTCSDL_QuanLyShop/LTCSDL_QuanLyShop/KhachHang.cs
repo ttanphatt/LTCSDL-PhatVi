@@ -22,7 +22,7 @@ namespace LTCSDL_QuanLyShop
     
         public int IDKH { get; set; }
         public string TenKH { get; set; }
-        public Nullable<int> SDT { get; set; }
+        public string SDT { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HoaDon> HoaDons { get; set; }

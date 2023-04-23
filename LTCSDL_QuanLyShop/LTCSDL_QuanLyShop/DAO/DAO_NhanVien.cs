@@ -25,6 +25,11 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
+        public NhanVien HienThiNVTheoID(int IDAcc)
+        {
+            NhanVien nv = db.NhanViens.Where(s => s.IDAcc == IDAcc).FirstOrDefault();
+            return nv;
+        }
         public void ThemNV(NhanVien s)
         {
             db.NhanViens.Add(s);
@@ -64,6 +69,19 @@ namespace LTCSDL_QuanLyShop.DAO
             NhanVien s = db.NhanViens.Find(nv.IDNV);
             db.NhanViens.Remove(s);
             db.SaveChanges();
+        }
+
+        public dynamic TimNV(string ten)
+        {
+            var ds = db.NhanViens.Where(s => s.TenNV.Contains(ten)).
+                Select(s => new
+                {
+                    s.IDNV,
+                    s.TenNV,
+                    s.SDT,
+                    s.Luong,
+                }).ToList();
+            return ds;
         }
     }
    

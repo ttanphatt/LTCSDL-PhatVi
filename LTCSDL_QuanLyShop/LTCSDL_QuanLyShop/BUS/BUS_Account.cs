@@ -21,6 +21,12 @@ namespace LTCSDL_QuanLyShop.BUS
         {
             dgv.DataSource = dAccount.HienThiAcc();
         }
+        public void HienThicbbAcc(ComboBox cbb)
+        {
+            cbb.DataSource = dAccount.HienThiAcc();
+            cbb.DisplayMember = "TenTK";
+            cbb.ValueMember = "IDAcc";
+        }
         public bool ThemAcc(Account a)
         {
             try
@@ -71,6 +77,20 @@ namespace LTCSDL_QuanLyShop.BUS
             }
             else
                 return false;
+        }
+        public void TimTK(DataGridView dgv, string ten)
+        {
+            if (dAccount.TimAcc(ten).Count != 0)
+            {
+                MessageBox.Show("Tìm thanh công");
+                dgv.DataSource = dAccount.TimAcc(ten);
+            }
+            else
+                MessageBox.Show("Không có tài khoản này");
+        }
+        public int LayID(String username)
+        {
+            return dAccount.LayId(username);
         }
     }
 }

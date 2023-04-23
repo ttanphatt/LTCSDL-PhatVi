@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a11283ab3ec648148b22f2ec4b605741" Name="Diagram1">
+      <Diagram DiagramId="e2e87cd437f64df78366b1ff51f5ecd0" Name="Diagram1">
         <EntityTypeShape EntityType="MyShopModel.Account" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
         <EntityTypeShape EntityType="MyShopModel.ChiTietHoaDon" Width="1.5" PointX="12.25" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyShopModel.ChiTietPN" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
@@ -14,14 +14,14 @@
         <EntityTypeShape EntityType="MyShopModel.NhanVien" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="MyShopModel.PhieuNhap" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="MyShopModel.SanPham" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
-        <AssociationConnector Association="MyShopModel.FK__NhanVien__IDAcc__4D94879B" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDHD__5FB337D6" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDSP__5EBF139D" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDPN__5BE2A6F2" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDSP__5AEE82B9" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__HoaDon__IDKH__5812160E" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNCC__5070F446" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNV__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__NhanVien__IDAcc__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDHD__3A81B327" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDSP__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDPN__36B12243" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDSP__35BCFE0A" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__HoaDon__IDKH__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNCC__2B3F6F97" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNV__2C3393D0" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

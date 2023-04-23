@@ -15,6 +15,13 @@ namespace LTCSDL_QuanLyShop.DAO
         {
             db = new MyShopEntities();
         }
+        public dynamic HienThitxtSP(string ten)
+        {
+            var ds = from p in db.SanPhams
+                     where p.TenSP.StartsWith(ten)
+                     select p.TenSP;
+            return ds;
+        }
         public dynamic HienThiSanPham()
         {
             var dsp = db.SanPhams.Select(s => new
@@ -27,6 +34,11 @@ namespace LTCSDL_QuanLyShop.DAO
                 s.GiaBan
             }).ToList();
             return dsp;
+        }
+        public SanPham HienThiSPTheoMa(int maSP)
+        {
+            SanPham sp = db.SanPhams.Where(s => s.IDSP == maSP).FirstOrDefault();
+            return sp;
         }
         public void ThemSP(SanPham s)
         {
@@ -70,7 +82,25 @@ namespace LTCSDL_QuanLyShop.DAO
             db.SanPhams.Remove(s);
             db.SaveChanges();
         }
-
+        public List<SanPham> TimSanPham(string ten)
+        {
+            var ds = db.SanPhams.Where(s => s.TenSP.Contains(ten)).ToList();
+            return ds;
+        }
+        public dynamic TimSP(string ten)
+        {
+            var ds = db.SanPhams.Where(s => s.TenSP.Contains(ten)).
+                Select(s => new
+                {
+                    s.IDSP,
+                    s.TenSP,
+                    s.SLKho,
+                    s.MauSac,
+                    s.XuatXu,
+                    s.GiaBan
+                }).ToList();
+            return ds;
+        }
 
         // NHÀ CUNG CẤP
         public dynamic HienThiNhaCungCap()
@@ -84,5 +114,7 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
+
+
     }
 }

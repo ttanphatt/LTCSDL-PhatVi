@@ -43,7 +43,7 @@
     </Key>
     <Property Name="IDKH" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="TenKH" Type="nvarchar" MaxLength="20" />
-    <Property Name="SDT" Type="int" />
+    <Property Name="SDT" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="NhaCungCap">
     <Key>
@@ -87,7 +87,7 @@
     <Property Name="GiaBan" Type="float" />
     <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
   </EntityType>
-  <Association Name="FK__ChiTietHoa__IDHD__5FB337D6">
+  <Association Name="FK__ChiTietHoa__IDHD__3A81B327">
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
     <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -99,7 +99,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietHoa__IDSP__5EBF139D">
+  <Association Name="FK__ChiTietHoa__IDSP__398D8EEE">
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
     <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -111,7 +111,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPN__IDPN__5BE2A6F2">
+  <Association Name="FK__ChiTietPN__IDPN__36B12243">
     <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
     <End Role="ChiTietPN" Type="Self.ChiTietPN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -123,7 +123,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPN__IDSP__5AEE82B9">
+  <Association Name="FK__ChiTietPN__IDSP__35BCFE0A">
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
     <End Role="ChiTietPN" Type="Self.ChiTietPN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -135,7 +135,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HoaDon__IDKH__5812160E">
+  <Association Name="FK__HoaDon__IDKH__32E0915F">
     <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -147,7 +147,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__NhanVien__IDAcc__4D94879B">
+  <Association Name="FK__NhanVien__IDAcc__286302EC">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="*" />
     <ReferentialConstraint>
@@ -159,7 +159,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhieuNhap__IDNCC__5070F446">
+  <Association Name="FK__PhieuNhap__IDNCC__2B3F6F97">
     <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="0..1" />
     <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -171,7 +171,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__PhieuNhap__IDNV__5165187F">
+  <Association Name="FK__PhieuNhap__IDNV__2C3393D0">
     <End Role="NhanVien" Type="Self.NhanVien" Multiplicity="0..1" />
     <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -187,6 +187,9 @@
     <Parameter Name="userName" Type="nvarchar" Mode="In" />
     <Parameter Name="password" Type="nvarchar" Mode="In" />
   </Function>
+  <Function Name="SP_GetID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="name" Type="nvarchar" Mode="In" />
+  </Function>
   <EntityContainer Name="MyShopModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ChiTietHoaDon" EntityType="Self.ChiTietHoaDon" Schema="dbo" store:Type="Tables" />
@@ -197,35 +200,35 @@
     <EntitySet Name="NhanVien" EntityType="Self.NhanVien" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PhieuNhap" EntityType="Self.PhieuNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SanPham" EntityType="Self.SanPham" Schema="dbo" store:Type="Tables" />
-    <AssociationSet Name="FK__ChiTietHoa__IDHD__5FB337D6" Association="Self.FK__ChiTietHoa__IDHD__5FB337D6">
+    <AssociationSet Name="FK__ChiTietHoa__IDHD__3A81B327" Association="Self.FK__ChiTietHoa__IDHD__3A81B327">
       <End Role="HoaDon" EntitySet="HoaDon" />
       <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietHoa__IDSP__5EBF139D" Association="Self.FK__ChiTietHoa__IDSP__5EBF139D">
+    <AssociationSet Name="FK__ChiTietHoa__IDSP__398D8EEE" Association="Self.FK__ChiTietHoa__IDSP__398D8EEE">
       <End Role="SanPham" EntitySet="SanPham" />
       <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDon" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPN__IDPN__5BE2A6F2" Association="Self.FK__ChiTietPN__IDPN__5BE2A6F2">
+    <AssociationSet Name="FK__ChiTietPN__IDPN__36B12243" Association="Self.FK__ChiTietPN__IDPN__36B12243">
       <End Role="PhieuNhap" EntitySet="PhieuNhap" />
       <End Role="ChiTietPN" EntitySet="ChiTietPN" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPN__IDSP__5AEE82B9" Association="Self.FK__ChiTietPN__IDSP__5AEE82B9">
+    <AssociationSet Name="FK__ChiTietPN__IDSP__35BCFE0A" Association="Self.FK__ChiTietPN__IDSP__35BCFE0A">
       <End Role="SanPham" EntitySet="SanPham" />
       <End Role="ChiTietPN" EntitySet="ChiTietPN" />
     </AssociationSet>
-    <AssociationSet Name="FK__HoaDon__IDKH__5812160E" Association="Self.FK__HoaDon__IDKH__5812160E">
+    <AssociationSet Name="FK__HoaDon__IDKH__32E0915F" Association="Self.FK__HoaDon__IDKH__32E0915F">
       <End Role="KhachHang" EntitySet="KhachHang" />
       <End Role="HoaDon" EntitySet="HoaDon" />
     </AssociationSet>
-    <AssociationSet Name="FK__NhanVien__IDAcc__4D94879B" Association="Self.FK__NhanVien__IDAcc__4D94879B">
+    <AssociationSet Name="FK__NhanVien__IDAcc__286302EC" Association="Self.FK__NhanVien__IDAcc__286302EC">
       <End Role="Account" EntitySet="Account" />
       <End Role="NhanVien" EntitySet="NhanVien" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhieuNhap__IDNCC__5070F446" Association="Self.FK__PhieuNhap__IDNCC__5070F446">
+    <AssociationSet Name="FK__PhieuNhap__IDNCC__2B3F6F97" Association="Self.FK__PhieuNhap__IDNCC__2B3F6F97">
       <End Role="NhaCungCap" EntitySet="NhaCungCap" />
       <End Role="PhieuNhap" EntitySet="PhieuNhap" />
     </AssociationSet>
-    <AssociationSet Name="FK__PhieuNhap__IDNV__5165187F" Association="Self.FK__PhieuNhap__IDNV__5165187F">
+    <AssociationSet Name="FK__PhieuNhap__IDNV__2C3393D0" Association="Self.FK__PhieuNhap__IDNV__2C3393D0">
       <End Role="NhanVien" EntitySet="NhanVien" />
       <End Role="PhieuNhap" EntitySet="PhieuNhap" />
     </AssociationSet>

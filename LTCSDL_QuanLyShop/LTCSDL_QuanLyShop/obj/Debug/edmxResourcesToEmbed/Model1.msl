@@ -98,5 +98,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_GetAccountByUsername" FunctionName="MyShopModel.Store.SP_GetAccountByUsername" />
+    <FunctionImportMapping FunctionImportName="SP_GetID" FunctionName="MyShopModel.Store.SP_GetID" />
   </EntityContainerMapping>
 </Mapping>

@@ -21,6 +21,12 @@ namespace LTCSDL_QuanLyShop.BUS
         {
             dgv.DataSource = dPhieuNhap.HienThiPN();
         }
+        public void HienThicbbPN(ComboBox cbb)
+        {
+            cbb.DataSource = dPhieuNhap.HienThiPN();
+            cbb.DisplayMember = "TenPN";
+            cbb.ValueMember = "IDPN";
+        }
         public PhieuNhap HienThiPNtheoID( int IDPN)
         {
            return dPhieuNhap.HienThiPN(IDPN);
@@ -77,6 +83,16 @@ namespace LTCSDL_QuanLyShop.BUS
                 return false;
         }
 
+        public void TimPN(DataGridView dgv, string ten)
+        {
+            if (dPhieuNhap.TimPN(ten).Count != 0)
+            {
+                MessageBox.Show("Tìm thành công");
+                dgv.DataSource = dPhieuNhap.TimPN(ten);
+            }
+            else
+                MessageBox.Show("Không có tên trong danh sách");
+        }
 
         //  ============= CHI TIẾT PHIẾU NHẬP  ===========
         public void HienThiChiTietPhieuNhap(DataGridView dgv, int IDPN)
@@ -94,6 +110,46 @@ namespace LTCSDL_QuanLyShop.BUS
             {
                 return false;
             }
+        }
+        public bool XoaCTPN(ChiTietPN c)
+        {
+            if (dPhieuNhap.CheckCTPN(c))
+            {
+                try
+                {
+                    dPhieuNhap.XoaCTPN(c);
+                    return true;
+                }
+                catch (DbUpdateException ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    return false;
+                }
+            }
+            else
+                return false;
+        }
+        public ChiTietPN LayCTPN(int ma)
+        {
+            return dPhieuNhap.LayCTPN(ma);
+        }
+        public bool CatNhatCTPN(ChiTietPN c)
+        {
+            if (dPhieuNhap.CheckCTPN(c))
+            {
+                try
+                {
+                    dPhieuNhap.CatNhatCTPN(c);
+                    return true;
+                }
+                catch (Exception)
+                {
+
+                    return false;
+                }
+            }
+            else
+                return false;
         }
         
     }

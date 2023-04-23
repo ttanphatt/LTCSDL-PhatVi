@@ -13,12 +13,17 @@ namespace LTCSDL_QuanLyShop
 {
     public partial class fChiTietPhieuNhap : Form
     {
-        
+
+        #region BienHV
         public int IDPN;
         public double tongtien;
         BUS_PhieuNhap bPhieuNhap;
         BUS_SanPham bSanPham;
-        
+        DataTable dtPhieuNhap;
+        bool co = false;
+        #endregion
+
+
         public fChiTietPhieuNhap()
         {
             InitializeComponent();
@@ -41,33 +46,63 @@ namespace LTCSDL_QuanLyShop
         }
         private void fChiTietPhieuNhap_Load(object sender, EventArgs e)
         {
-
+            HienThicbbSP();
+            co = true;
             PhieuNhap pn = bPhieuNhap.HienThiPNtheoID(IDPN);
             txtTongTienNhap.Text = pn.TongTien.ToString();
             txtIDPN.Text = IDPN.ToString();
-            txtTongTienNhap.Text = "0";
             bPhieuNhap.HienThiChiTietPhieuNhap(dgvCTPN, IDPN);
-            HienThicbbSP();
+            
+
+             
         }
 
         private void btThemCTPN_Click(object sender, EventArgs e)
         {
-            
+            bool ktSanPham = true;
             ChiTietPN ct = new ChiTietPN();
-            ct.IDPN = IDPN;
-            ct.IDSP = int.Parse(cbbTenSP.SelectedValue.ToString());
-            ct.SoLuong = Convert.ToInt32(numSLNhap.Value);
-            ct.DonGia = float.Parse(txtGiaNhap.Text.ToString());
-            txtTongTienNhap.Text = (float.Parse(txtTongTienNhap.Text) + (ct.DonGia * float.Parse(ct.SoLuong.ToString()))).ToString();
-            //txtTongTienNhap.Text = (float.Parse(txtTongTienNhap.ToString()) + (float.Parse(numSLNhap.Value.ToString()) * float.Parse(txtGiaNhap.Text.ToString()))).ToString();
-            if (bPhieuNhap.ThemCTPN(ct))
-            {
 
-                bPhieuNhap.HienThiChiTietPhieuNhap(dgvCTPN, IDPN);
-            }
-            else
+            for (int i = 0; i < dgvCTPN.Rows.Count; i++)
             {
-                MessageBox.Show("Thêm sản phẩm thất bại");
+                ChiTietPN ctpn = bPhieuNhap.LayCTPN(int.Parse(dgvCTPN.Rows[i].Cells[0].Value.ToString()));
+                if (Int32.Parse(cbbTenSP.SelectedValue.ToString()) == ctpn.IDSP)
+                {
+                    
+                    ct.IDCTPN = ctpn.IDCTPN;
+                    ct.IDPN = IDPN;
+                    ct.IDSP = ctpn.IDSP;
+                    ct.SoLuong = ctpn.SoLuong + Int32.Parse(numSLNhap.Value.ToString());
+                    ct.DonGia = ctpn.DonGia;
+                    txtTongTienNhap.Text = (float.Parse(txtTongTienNhap.Text) + (ct.DonGia * float.Parse(ct.SoLuong.ToString()))).ToString();
+                    if (bPhieuNhap.CatNhatCTPN(ct))
+                    {
+                        bPhieuNhap.HienThiChiTietPhieuNhap(dgvCTPN, IDPN);
+                        MessageBox.Show("Sản phẩm đã chọn");
+                    }
+                    else
+                        MessageBox.Show("Thất bại");
+                    ktSanPham = false;
+                    break;
+                }
+            }
+
+            if (ktSanPham)
+            {
+                ct.IDCTPN = 
+                ct.IDPN = IDPN;
+                ct.IDSP = int.Parse(cbbTenSP.SelectedValue.ToString());
+                ct.SoLuong = Convert.ToInt32(numSLNhap.Value);
+                ct.DonGia = float.Parse(txtGiaNhap.Text.ToString());
+                txtTongTienNhap.Text = (float.Parse(txtTongTienNhap.Text) + (ct.DonGia * float.Parse(ct.SoLuong.ToString()))).ToString();
+                if (bPhieuNhap.ThemCTPN(ct))
+                {
+
+                    bPhieuNhap.HienThiChiTietPhieuNhap(dgvCTPN, IDPN);
+                }
+                else
+                {
+                    MessageBox.Show("Thêm sản phẩm thất bại");
+                } 
             }
         }
         private void btLuu_Click(object sender, EventArgs e)
@@ -92,12 +127,36 @@ namespace LTCSDL_QuanLyShop
                 MessageBox.Show("Thất bại");
             }
         }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void cbbTenSP_SelectedIndexChanged(object sender, EventArgs e)
         {
-
+            SanPham sp;
+            int maSanPham;
+            if(co)
+            {
+                maSanPham = int.Parse(cbbTenSP.SelectedValue.ToString());
+                sp = bSanPham.HienThiSPTheoMa(maSanPham);
+                txtGiaNhap.Text = sp.GiaBan.ToString();
+            }    
         }
 
-        
+        private void btnXoaCTPN_Click(object sender, EventArgs e)
+        {
+            if(this.dgvCTPN.SelectedRows.Count > 0)
+            {
+                ChiTietPN ct = new ChiTietPN();
+                int index = dgvCTPN.CurrentCell.RowIndex;
+                ct.IDCTPN = int.Parse(dgvCTPN.Rows[index].Cells["IDHD"].Value.ToString());
+                ChiTietPN c = bPhieuNhap.LayCTPN(ct.IDCTPN);
+                txtTongTienNhap.Text = (float.Parse(txtTongTienNhap.Text) - (c.DonGia * int.Parse(c.SoLuong.ToString()))).ToString();
+                if (bPhieuNhap.XoaCTPN(ct))
+                {
+                    bPhieuNhap.HienThiChiTietPhieuNhap(dgvCTPN, IDPN);
+                    MessageBox.Show("Xóa thành công");
+                }
+            }    
+            
+            else
+                MessageBox.Show("Xóa thất bại");
+        }
     }
 }

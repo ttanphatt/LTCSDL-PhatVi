@@ -49,5 +49,14 @@ namespace LTCSDL_QuanLyShop
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetAccountByUsername", userNameParameter, passwordParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> SP_GetID(string name)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("name", name) :
+                new ObjectParameter("name", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_GetID", nameParameter);
+        }
     }
 }

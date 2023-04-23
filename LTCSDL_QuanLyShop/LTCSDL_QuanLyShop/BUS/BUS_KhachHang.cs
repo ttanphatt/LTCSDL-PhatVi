@@ -20,6 +20,16 @@ namespace LTCSDL_QuanLyShop.BUS
         {
             dgv.DataSource = dKhachHang.HienThiKH();
         }
+        public void HienThicbbKH(ComboBox cbb)
+        {
+            cbb.DataSource = dKhachHang.HienThiKH();
+            cbb.DisplayMember = "TenKH";
+            cbb.ValueMember = "IDKH";
+        }
+        public KhachHang HienTTKHTheoMa(int maKH)
+        {
+            return dKhachHang.HienThiThongTinKHTheoMa(maKH);
+        }
         public bool ThemKH(KhachHang k)
         {
             try
@@ -70,6 +80,17 @@ namespace LTCSDL_QuanLyShop.BUS
             }
             else
                 return false;
+        }
+
+        public void TimKH(DataGridView dgv, string ten)
+        {
+            if (dKhachHang.TimKH(ten).Count != 0)
+            {
+                MessageBox.Show("Tìm thành công");
+                dgv.DataSource = dKhachHang.TimKH(ten);
+            }
+            else
+                MessageBox.Show("Không có tên trong danh sách");
         }
     }
 }

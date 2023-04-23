@@ -24,6 +24,11 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
+        public int LayId(string user)
+        {
+            var ds = db.SP_GetID(user).Select(s => new { s.Value }).ToList();
+            return ds[0].Value;
+        }
         public void ThemAcc(Account a)
         {
             db.Accounts.Add(a);
@@ -63,6 +68,19 @@ namespace LTCSDL_QuanLyShop.DAO
             Account a = db.Accounts.Find(ac.IDAcc);
             db.Accounts.Remove(a);
             db.SaveChanges();
+        }
+
+        public dynamic TimAcc (String ten)
+        {
+            var ds = db.Accounts.Where(s => s.TenTK.Contains(ten)).
+                Select(s => new
+                {
+                    s.IDAcc,
+                    s.TenTK,
+                    s.PassTK
+                }).ToList();
+            return ds;
+
         }
     }
 }

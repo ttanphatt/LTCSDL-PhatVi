@@ -13,16 +13,23 @@ namespace LTCSDL_QuanLyShop
 {
     public partial class fLogin : Form
     {
-        BUS_Login bLogin = new BUS_Login();
+        BUS_Login bLogin;
+        BUS_Account bAccount;
         public fLogin()
         {
             InitializeComponent();
+            bLogin = new BUS_Login();
+            bAccount = new BUS_Account();
         }
 
         private void fLogin_Load(object sender, EventArgs e)
         {
-
+            
+            Screen scr = Screen.PrimaryScreen; //đi lấy màn hình chính
+            this.Left = (scr.WorkingArea.Width - this.Width)/ 2;
+            this.Top = (scr.WorkingArea.Height - this.Height)/ 2;
         }
+    
         bool Login(string username, string password)
         {
             txtUserName.Text = "";
@@ -31,11 +38,14 @@ namespace LTCSDL_QuanLyShop
         }
         private void btnLogin_Click(object sender, EventArgs e)
         {
+            int IDAcc;
             string username = txtUserName.Text;
             string password = txtPassWord.Text;
             if (Login(username, password))
             {
+                IDAcc = bAccount.LayID(username);
                 fTrangChu f = new fTrangChu();
+                f.IDAcc = IDAcc;
                 this.Hide();
                 f.ShowDialog();
                 this.Show();
@@ -55,6 +65,11 @@ namespace LTCSDL_QuanLyShop
         private void btnClose_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
