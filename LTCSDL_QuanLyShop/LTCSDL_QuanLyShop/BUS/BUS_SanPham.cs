@@ -17,7 +17,13 @@ namespace LTCSDL_QuanLyShop.BUS
         {
             dSanPham = new DAO_SanPham();
         }
-        
+        //---------- Danh Muc --------
+        public void HienThicbbDM(ComboBox cbb)
+        {
+            cbb.DataSource = dSanPham.HienThiDM();
+            cbb.DisplayMember = "TenDM";
+            cbb.ValueMember = "IDDM";
+        }
         public void HienThiSP(DataGridView dgv)
         {
             dgv.DataSource = dSanPham.HienThiSanPham();

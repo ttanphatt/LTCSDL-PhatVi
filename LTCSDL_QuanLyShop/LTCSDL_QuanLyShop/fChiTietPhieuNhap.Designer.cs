@@ -159,7 +159,7 @@
             this.cbbTenSP.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbbTenSP.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbbTenSP.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbbTenSP.ForeColor = System.Drawing.SystemColors.ScrollBar;
+            this.cbbTenSP.ForeColor = System.Drawing.Color.Black;
             this.cbbTenSP.FormattingEnabled = true;
             this.cbbTenSP.Location = new System.Drawing.Point(213, 34);
             this.cbbTenSP.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);

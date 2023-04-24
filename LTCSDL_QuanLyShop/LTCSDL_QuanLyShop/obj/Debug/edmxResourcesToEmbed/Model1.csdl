@@ -1,11 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="MyShopModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <ComplexType Name="FN_DOANHTHU_THEONHOMHANG_Result">
+    <Property Name="IDDM" Type="Int32" />
+    <Property Name="TenDM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="THANHTIEN" Type="Double" />
+  </ComplexType>
   <EntityType Name="Account">
     <Key>
       <PropertyRef Name="IDAcc" />
     </Key>
     <Property Name="IDAcc" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenTK" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LoaiACC" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="PassTK" Type="Int32" />
     <NavigationProperty Name="NhanViens" Relationship="Self.FK__NhanVien__IDAcc__286302EC" FromRole="Account" ToRole="NhanVien" />
   </EntityType>
@@ -16,10 +22,11 @@
     <Property Name="IDCTHD" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="SoLuong" Type="Int32" />
     <Property Name="DonGia" Type="Double" />
+    <Property Name="TongTien" Type="Double" />
     <Property Name="IDSP" Type="Int32" Nullable="false" />
     <Property Name="IDHD" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="HoaDon" Relationship="Self.FK__ChiTietHoa__IDHD__3A81B327" FromRole="ChiTietHoaDon" ToRole="HoaDon" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietHoa__IDSP__398D8EEE" FromRole="ChiTietHoaDon" ToRole="SanPham" />
+    <NavigationProperty Name="HoaDon" Relationship="Self.FK__ChiTietHoa__IDHD__3D5E1FD2" FromRole="ChiTietHoaDon" ToRole="HoaDon" />
+    <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietHoa__IDSP__3C69FB99" FromRole="ChiTietHoaDon" ToRole="SanPham" />
   </EntityType>
   <EntityType Name="ChiTietPN">
     <Key>
@@ -30,8 +37,16 @@
     <Property Name="DonGia" Type="Double" />
     <Property Name="IDSP" Type="Int32" Nullable="false" />
     <Property Name="IDPN" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="PhieuNhap" Relationship="Self.FK__ChiTietPN__IDPN__36B12243" FromRole="ChiTietPN" ToRole="PhieuNhap" />
-    <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietPN__IDSP__35BCFE0A" FromRole="ChiTietPN" ToRole="SanPham" />
+    <NavigationProperty Name="PhieuNhap" Relationship="Self.FK__ChiTietPN__IDPN__398D8EEE" FromRole="ChiTietPN" ToRole="PhieuNhap" />
+    <NavigationProperty Name="SanPham" Relationship="Self.FK__ChiTietPN__IDSP__38996AB5" FromRole="ChiTietPN" ToRole="SanPham" />
+  </EntityType>
+  <EntityType Name="DanhMuc">
+    <Key>
+      <PropertyRef Name="IDDM" />
+    </Key>
+    <Property Name="IDDM" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="TenDM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="SanPhams" Relationship="Self.FK__SanPham__IDDM__30F848ED" FromRole="DanhMuc" ToRole="SanPham" />
   </EntityType>
   <EntityType Name="HoaDon">
     <Key>
@@ -41,8 +56,8 @@
     <Property Name="NgayLap" Type="DateTime" Precision="0" />
     <Property Name="TongTien" Type="Double" />
     <Property Name="IDKH" Type="Int32" />
-    <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHoa__IDHD__3A81B327" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
-    <NavigationProperty Name="KhachHang" Relationship="Self.FK__HoaDon__IDKH__32E0915F" FromRole="HoaDon" ToRole="KhachHang" />
+    <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHoa__IDHD__3D5E1FD2" FromRole="HoaDon" ToRole="ChiTietHoaDon" />
+    <NavigationProperty Name="KhachHang" Relationship="Self.FK__HoaDon__IDKH__35BCFE0A" FromRole="HoaDon" ToRole="KhachHang" />
   </EntityType>
   <EntityType Name="KhachHang">
     <Key>
@@ -51,7 +66,7 @@
     <Property Name="IDKH" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="TenKH" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__IDKH__32E0915F" FromRole="KhachHang" ToRole="HoaDon" />
+    <NavigationProperty Name="HoaDons" Relationship="Self.FK__HoaDon__IDKH__35BCFE0A" FromRole="KhachHang" ToRole="HoaDon" />
   </EntityType>
   <EntityType Name="NhaCungCap">
     <Key>
@@ -85,7 +100,7 @@
     <Property Name="TongTien" Type="Double" />
     <Property Name="IDNCC" Type="Int32" />
     <Property Name="IDNV" Type="Int32" />
-    <NavigationProperty Name="ChiTietPNs" Relationship="Self.FK__ChiTietPN__IDPN__36B12243" FromRole="PhieuNhap" ToRole="ChiTietPN" />
+    <NavigationProperty Name="ChiTietPNs" Relationship="Self.FK__ChiTietPN__IDPN__398D8EEE" FromRole="PhieuNhap" ToRole="ChiTietPN" />
     <NavigationProperty Name="NhaCungCap" Relationship="Self.FK__PhieuNhap__IDNCC__2B3F6F97" FromRole="PhieuNhap" ToRole="NhaCungCap" />
     <NavigationProperty Name="NhanVien" Relationship="Self.FK__PhieuNhap__IDNV__2C3393D0" FromRole="PhieuNhap" ToRole="NhanVien" />
   </EntityType>
@@ -100,8 +115,10 @@
     <Property Name="XuatXu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="GiaBan" Type="Double" />
     <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHoa__IDSP__398D8EEE" FromRole="SanPham" ToRole="ChiTietHoaDon" />
-    <NavigationProperty Name="ChiTietPNs" Relationship="Self.FK__ChiTietPN__IDSP__35BCFE0A" FromRole="SanPham" ToRole="ChiTietPN" />
+    <Property Name="IDDM" Type="Int32" />
+    <NavigationProperty Name="ChiTietHoaDons" Relationship="Self.FK__ChiTietHoa__IDSP__3C69FB99" FromRole="SanPham" ToRole="ChiTietHoaDon" />
+    <NavigationProperty Name="ChiTietPNs" Relationship="Self.FK__ChiTietPN__IDSP__38996AB5" FromRole="SanPham" ToRole="ChiTietPN" />
+    <NavigationProperty Name="DanhMuc" Relationship="Self.FK__SanPham__IDDM__30F848ED" FromRole="SanPham" ToRole="DanhMuc" />
   </EntityType>
   <Association Name="FK__NhanVien__IDAcc__286302EC">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
@@ -115,7 +132,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietHoa__IDHD__3A81B327">
+  <Association Name="FK__ChiTietHoa__IDHD__3D5E1FD2">
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="1" />
     <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -127,7 +144,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietHoa__IDSP__398D8EEE">
+  <Association Name="FK__ChiTietHoa__IDSP__3C69FB99">
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
     <End Role="ChiTietHoaDon" Type="Self.ChiTietHoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -139,7 +156,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPN__IDPN__36B12243">
+  <Association Name="FK__ChiTietPN__IDPN__398D8EEE">
     <End Role="PhieuNhap" Type="Self.PhieuNhap" Multiplicity="1" />
     <End Role="ChiTietPN" Type="Self.ChiTietPN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -151,7 +168,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ChiTietPN__IDSP__35BCFE0A">
+  <Association Name="FK__ChiTietPN__IDSP__38996AB5">
     <End Role="SanPham" Type="Self.SanPham" Multiplicity="1" />
     <End Role="ChiTietPN" Type="Self.ChiTietPN" Multiplicity="*" />
     <ReferentialConstraint>
@@ -163,7 +180,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__HoaDon__IDKH__32E0915F">
+  <Association Name="FK__SanPham__IDDM__30F848ED">
+    <End Role="DanhMuc" Type="Self.DanhMuc" Multiplicity="0..1" />
+    <End Role="SanPham" Type="Self.SanPham" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DanhMuc">
+        <PropertyRef Name="IDDM" />
+      </Principal>
+      <Dependent Role="SanPham">
+        <PropertyRef Name="IDDM" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__HoaDon__IDKH__35BCFE0A">
     <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="0..1" />
     <End Role="HoaDon" Type="Self.HoaDon" Multiplicity="*" />
     <ReferentialConstraint>
@@ -203,6 +232,7 @@
     <EntitySet Name="Accounts" EntityType="Self.Account" />
     <EntitySet Name="ChiTietHoaDons" EntityType="Self.ChiTietHoaDon" />
     <EntitySet Name="ChiTietPNs" EntityType="Self.ChiTietPN" />
+    <EntitySet Name="DanhMucs" EntityType="Self.DanhMuc" />
     <EntitySet Name="HoaDons" EntityType="Self.HoaDon" />
     <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
     <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
@@ -213,23 +243,27 @@
       <End Role="Account" EntitySet="Accounts" />
       <End Role="NhanVien" EntitySet="NhanViens" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietHoa__IDHD__3A81B327" Association="Self.FK__ChiTietHoa__IDHD__3A81B327">
+    <AssociationSet Name="FK__ChiTietHoa__IDHD__3D5E1FD2" Association="Self.FK__ChiTietHoa__IDHD__3D5E1FD2">
       <End Role="HoaDon" EntitySet="HoaDons" />
       <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietHoa__IDSP__398D8EEE" Association="Self.FK__ChiTietHoa__IDSP__398D8EEE">
+    <AssociationSet Name="FK__ChiTietHoa__IDSP__3C69FB99" Association="Self.FK__ChiTietHoa__IDSP__3C69FB99">
       <End Role="SanPham" EntitySet="SanPhams" />
       <End Role="ChiTietHoaDon" EntitySet="ChiTietHoaDons" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPN__IDPN__36B12243" Association="Self.FK__ChiTietPN__IDPN__36B12243">
+    <AssociationSet Name="FK__ChiTietPN__IDPN__398D8EEE" Association="Self.FK__ChiTietPN__IDPN__398D8EEE">
       <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
       <End Role="ChiTietPN" EntitySet="ChiTietPNs" />
     </AssociationSet>
-    <AssociationSet Name="FK__ChiTietPN__IDSP__35BCFE0A" Association="Self.FK__ChiTietPN__IDSP__35BCFE0A">
+    <AssociationSet Name="FK__ChiTietPN__IDSP__38996AB5" Association="Self.FK__ChiTietPN__IDSP__38996AB5">
       <End Role="SanPham" EntitySet="SanPhams" />
       <End Role="ChiTietPN" EntitySet="ChiTietPNs" />
     </AssociationSet>
-    <AssociationSet Name="FK__HoaDon__IDKH__32E0915F" Association="Self.FK__HoaDon__IDKH__32E0915F">
+    <AssociationSet Name="FK__SanPham__IDDM__30F848ED" Association="Self.FK__SanPham__IDDM__30F848ED">
+      <End Role="DanhMuc" EntitySet="DanhMucs" />
+      <End Role="SanPham" EntitySet="SanPhams" />
+    </AssociationSet>
+    <AssociationSet Name="FK__HoaDon__IDKH__35BCFE0A" Association="Self.FK__HoaDon__IDKH__35BCFE0A">
       <End Role="KhachHang" EntitySet="KhachHangs" />
       <End Role="HoaDon" EntitySet="HoaDons" />
     </AssociationSet>
@@ -241,6 +275,10 @@
       <End Role="NhanVien" EntitySet="NhanViens" />
       <End Role="PhieuNhap" EntitySet="PhieuNhaps" />
     </AssociationSet>
+    <FunctionImport Name="FN_DOANHTHU_THEONHOMHANG" IsComposable="true" ReturnType="Collection(MyShopModel.FN_DOANHTHU_THEONHOMHANG_Result)">
+      <Parameter Name="NGAYD" Mode="In" Type="DateTime" />
+      <Parameter Name="NGAYC" Mode="In" Type="DateTime" />
+    </FunctionImport>
     <FunctionImport Name="SP_GetAccountByUsername" ReturnType="Collection(Int32)">
       <Parameter Name="userName" Mode="In" Type="String" />
       <Parameter Name="password" Mode="In" Type="String" />

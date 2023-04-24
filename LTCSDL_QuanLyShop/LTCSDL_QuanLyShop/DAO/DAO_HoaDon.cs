@@ -57,16 +57,16 @@ namespace LTCSDL_QuanLyShop.DAO
                 }).ToList();
             return ds;
         }
-        public bool CheckHD(HoaDon h)
+        public bool CheckHD(int ma)
         {
-            HoaDon hd = db.HoaDons.Find(h.IDHD);
-            if (h != null)
+            HoaDon hd = db.HoaDons.Find(ma);
+            if (hd != null)
                 return true;
             return false;
         }
-        public void XoaHD(HoaDon h)
+        public void XoaHD(int ma)
         {
-            HoaDon hd = db.HoaDons.Find(h.IDHD);
+            HoaDon hd = db.HoaDons.Find(ma);
             db.HoaDons.Remove(hd);
             db.SaveChanges();
         }
@@ -85,8 +85,11 @@ namespace LTCSDL_QuanLyShop.DAO
         }
         public ChiTietHoaDon HienThiThongTinCTHD(int maCTHD)
         {
-            ChiTietHoaDon ct = db.ChiTietHoaDons.Where(s => s.IDCTHD == maCTHD).FirstOrDefault();
-            return ct;
+            return db.ChiTietHoaDons.Where(s => s.IDHD == maCTHD).FirstOrDefault();
+        }
+        public List<ChiTietHoaDon> HienThiDSCTHDTheoMa(int maCTHD)
+        {
+            return db.ChiTietHoaDons.Where(s => s.IDHD == maCTHD).ToList();
         }
         public bool CheckCTHD(int ma)
         {

@@ -26,7 +26,7 @@ namespace LTCSDL_QuanLyShop.BUS
             cbb.DisplayMember = "TenKH";
             cbb.ValueMember = "IDKH";
         }
-        public KhachHang HienTTKHTheoMa(int maKH)
+        public KhachHang HienTTKHTheoMa(int? maKH)
         {
             return dKhachHang.HienThiThongTinKHTheoMa(maKH);
         }

@@ -28,10 +28,12 @@ namespace LTCSDL_QuanLyShop
         public string XuatXu { get; set; }
         public Nullable<double> GiaBan { get; set; }
         public string DonViTinh { get; set; }
+        public Nullable<int> IDDM { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChiTietPN> ChiTietPNs { get; set; }
+        public virtual DanhMuc DanhMuc { get; set; }
     }
 }

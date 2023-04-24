@@ -104,6 +104,10 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
+        public List<ChiTietPN> HienThiCTPNTheoID(int ma)
+        {
+            return db.ChiTietPNs.Where(s => s.IDCTPN == ma).ToList();
+        }
         public void ThemCTPN(ChiTietPN c)
         {
             db.ChiTietPNs.Add(c);

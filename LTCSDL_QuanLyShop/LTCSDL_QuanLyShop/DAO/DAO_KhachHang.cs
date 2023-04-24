@@ -24,7 +24,7 @@ namespace LTCSDL_QuanLyShop.DAO
             }).ToList();
             return ds;
         }
-        public KhachHang HienThiThongTinKHTheoMa(int maKH)
+        public KhachHang HienThiThongTinKHTheoMa(int? maKH)
         {
             KhachHang kh = db.KhachHangs.Where(s => s.IDKH == maKH).FirstOrDefault();
             return kh;

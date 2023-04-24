@@ -59,14 +59,7 @@ namespace LTCSDL_QuanLyShop
 
         private void cbbKhachHang_SelectedIndexChanged(object sender, EventArgs e)
         {
-            KhachHang kh;
-            int maKH;
-            if (co)
-            {
-                maKH = Int32.Parse(cbbTenKH.SelectedValue.ToString());
-                kh = bKhachHang.HienTTKHTheoMa(maKH);
-                txtSDTKH.Text = kh.SDT.ToString(); 
-            }
+            
         }
 
         private void btnThemSP_Click(object sender, EventArgs e)
@@ -206,7 +199,6 @@ namespace LTCSDL_QuanLyShop
 
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            int IDHD;
             pnTTSP.Enabled = false;
             gbTTHD.Enabled = false;
             HoaDon h = new HoaDon();
@@ -214,11 +206,12 @@ namespace LTCSDL_QuanLyShop
             h.NgayLap = DateTime.Now;
             h.TongTien = float.Parse(lbTongTienHD.Text);
             h.IDKH = int.Parse(cbbTenKH.SelectedValue.ToString());
-            if(bHoaDon.CapNhatHD(h))
+            if (bHoaDon.CapNhatHD(h))
             {
                 MessageBox.Show("Thanh toán thành công");
                 fThongTinHoaDon f = new fThongTinHoaDon();
                 f.IDHD = h.IDHD;
+                this.Hide();
                 f.ShowDialog();
                 lbIDHD.Text = " ";
                 lbTongTienHD.Text = " ";
@@ -228,6 +221,26 @@ namespace LTCSDL_QuanLyShop
             {
                 MessageBox.Show("Thanh toán thất bại");
             }    
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bạn có muốn thoát chương trình không???");
+            fTrangChu f = new fTrangChu();
+            this.Hide();
+            f.ShowDialog();
+        }
+
+        private void cbbTenKH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            KhachHang kh;
+            int maKH;
+            if (co)
+            {
+                maKH = Int32.Parse(cbbTenKH.SelectedValue.ToString());
+                kh = bKhachHang.HienTTKHTheoMa(maKH);
+                txtSDTKH.Text = kh.SDT.ToString();
+            }
         }
     }
     

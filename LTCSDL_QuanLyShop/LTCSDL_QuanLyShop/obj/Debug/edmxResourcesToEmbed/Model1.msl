@@ -6,6 +6,7 @@
         <MappingFragment StoreEntitySet="Account">
           <ScalarProperty Name="IDAcc" ColumnName="IDAcc" />
           <ScalarProperty Name="TenTK" ColumnName="TenTK" />
+          <ScalarProperty Name="LoaiACC" ColumnName="LoaiACC" />
           <ScalarProperty Name="PassTK" ColumnName="PassTK" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -16,6 +17,7 @@
           <ScalarProperty Name="IDCTHD" ColumnName="IDCTHD" />
           <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
           <ScalarProperty Name="DonGia" ColumnName="DonGia" />
+          <ScalarProperty Name="TongTien" ColumnName="TongTien" />
           <ScalarProperty Name="IDSP" ColumnName="IDSP" />
           <ScalarProperty Name="IDHD" ColumnName="IDHD" />
         </MappingFragment>
@@ -29,6 +31,14 @@
           <ScalarProperty Name="DonGia" ColumnName="DonGia" />
           <ScalarProperty Name="IDSP" ColumnName="IDSP" />
           <ScalarProperty Name="IDPN" ColumnName="IDPN" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DanhMucs">
+      <EntityTypeMapping TypeName="MyShopModel.DanhMuc">
+        <MappingFragment StoreEntitySet="DanhMuc">
+          <ScalarProperty Name="IDDM" ColumnName="IDDM" />
+          <ScalarProperty Name="TenDM" ColumnName="TenDM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -94,9 +104,19 @@
           <ScalarProperty Name="XuatXu" ColumnName="XuatXu" />
           <ScalarProperty Name="GiaBan" ColumnName="GiaBan" />
           <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
+          <ScalarProperty Name="IDDM" ColumnName="IDDM" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionName="MyShopModel.Store.FN_DOANHTHU_THEONHOMHANG" FunctionImportName="FN_DOANHTHU_THEONHOMHANG">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="MyShopModel.FN_DOANHTHU_THEONHOMHANG_Result">
+          <ScalarProperty Name="IDDM" ColumnName="IDDM" />
+          <ScalarProperty Name="TenDM" ColumnName="TenDM" />
+          <ScalarProperty Name="THANHTIEN" ColumnName="THANHTIEN" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_GetAccountByUsername" FunctionName="MyShopModel.Store.SP_GetAccountByUsername" />
     <FunctionImportMapping FunctionImportName="SP_GetID" FunctionName="MyShopModel.Store.SP_GetID" />
   </EntityContainerMapping>

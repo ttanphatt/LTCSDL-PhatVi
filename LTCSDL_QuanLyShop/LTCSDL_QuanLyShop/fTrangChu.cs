@@ -73,5 +73,13 @@ namespace LTCSDL_QuanLyShop
             HienThiThongNV();
 
         }
+
+        private void đăngXuấtToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bạn có thực sự muốn thoát chương trình?");
+            fLogin f = new fLogin();
+            this.Hide();
+            f.ShowDialog();
+        }
     }
 }

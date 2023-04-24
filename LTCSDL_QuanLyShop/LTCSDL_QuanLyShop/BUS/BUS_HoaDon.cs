@@ -22,7 +22,7 @@ namespace LTCSDL_QuanLyShop.BUS
         }
         public bool CapNhatHD(HoaDon h)
         {
-            if (dHoaDon.CheckHD(h))
+            if (dHoaDon.CheckHD(h.IDHD))
             {
                 try
                 {
@@ -67,13 +67,17 @@ namespace LTCSDL_QuanLyShop.BUS
                 MessageBox.Show("Không có khách hàng");
 
         }
-        public bool XoaHD(HoaDon h)
+        public bool XoaHD(int ma)
         {
-            if (dHoaDon.CheckHD(h))
+            if (dHoaDon.CheckHD(ma))
             {
                 try
                 {
-                    dHoaDon.XoaHD(h);
+                    foreach (ChiTietHoaDon s in dHoaDon.HienThiDSCTHDTheoMa(ma))
+                    {
+                        string.IsNullOrEmpty(s.IDHD.ToString());
+                    }      
+                    dHoaDon.XoaHD(ma);
                     return true;
                 }
                 catch (DbUpdateException ex)

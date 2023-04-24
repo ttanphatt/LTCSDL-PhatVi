@@ -24,7 +24,7 @@ namespace LTCSDL_QuanLyShop
 
         private void fLogin_Load(object sender, EventArgs e)
         {
-            
+            bAccount.HienThicbbLogin(cbbLogin);
             Screen scr = Screen.PrimaryScreen; //đi lấy màn hình chính
             this.Left = (scr.WorkingArea.Width - this.Width)/ 2;
             this.Top = (scr.WorkingArea.Height - this.Height)/ 2;
@@ -39,16 +39,31 @@ namespace LTCSDL_QuanLyShop
         private void btnLogin_Click(object sender, EventArgs e)
         {
             int IDAcc;
+            string loaiUser = cbbLogin.Text;
             string username = txtUserName.Text;
             string password = txtPassWord.Text;
             if (Login(username, password))
             {
-                IDAcc = bAccount.LayID(username);
-                fTrangChu f = new fTrangChu();
-                f.IDAcc = IDAcc;
-                this.Hide();
-                f.ShowDialog();
-                this.Show();
+                MessageBox.Show("Đăng nhập thành công!!!");
+                if(loaiUser == "Nhân Viên")
+                {
+                    IDAcc = bAccount.LayID(username);
+                    fTrangChu f = new fTrangChu();
+                    f.IDAcc = IDAcc;
+                    this.Hide();
+                    f.ShowDialog();
+                    this.Show();
+                }
+                else if(loaiUser == "Admin")
+                {
+                    IDAcc = bAccount.LayID(username);
+                    fAdmin f = new fAdmin();
+                    f.IDNV = IDAcc;
+                    this.Hide();
+                    f.ShowDialog();
+                    this.Show();
+                }
+                
             }
             else
                 MessageBox.Show("Bạn vui lòng nhập lại tên đăng nhập và mật khẩu");

@@ -15,6 +15,16 @@ namespace LTCSDL_QuanLyShop.DAO
         {
             db = new MyShopEntities();
         }
+        //--------Danh Muc ---------
+        public dynamic HienThiDM()
+        {
+            var ds = db.DanhMucs.Select(s => new
+            {
+                s.IDDM,
+                s.TenDM
+            }).ToList();
+            return ds;
+        }
         public dynamic HienThitxtSP(string ten)
         {
             var ds = from p in db.SanPhams
@@ -22,6 +32,7 @@ namespace LTCSDL_QuanLyShop.DAO
                      select p.TenSP;
             return ds;
         }
+        
         public dynamic HienThiSanPham()
         {
             var dsp = db.SanPhams.Select(s => new

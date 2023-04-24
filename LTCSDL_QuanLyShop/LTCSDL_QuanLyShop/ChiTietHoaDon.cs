@@ -17,6 +17,7 @@ namespace LTCSDL_QuanLyShop
         public int IDCTHD { get; set; }
         public Nullable<int> SoLuong { get; set; }
         public Nullable<double> DonGia { get; set; }
+        public Nullable<double> TongTien { get; set; }
         public int IDSP { get; set; }
         public int IDHD { get; set; }
     

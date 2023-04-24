@@ -22,6 +22,7 @@ namespace LTCSDL_QuanLyShop
     
         public int IDAcc { get; set; }
         public string TenTK { get; set; }
+        public string LoaiACC { get; set; }
         public Nullable<int> PassTK { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

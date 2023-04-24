@@ -30,12 +30,27 @@ namespace LTCSDL_QuanLyShop
         public virtual DbSet<Account> Accounts { get; set; }
         public virtual DbSet<ChiTietHoaDon> ChiTietHoaDons { get; set; }
         public virtual DbSet<ChiTietPN> ChiTietPNs { get; set; }
+        public virtual DbSet<DanhMuc> DanhMucs { get; set; }
         public virtual DbSet<HoaDon> HoaDons { get; set; }
         public virtual DbSet<KhachHang> KhachHangs { get; set; }
         public virtual DbSet<NhaCungCap> NhaCungCaps { get; set; }
         public virtual DbSet<NhanVien> NhanViens { get; set; }
         public virtual DbSet<PhieuNhap> PhieuNhaps { get; set; }
         public virtual DbSet<SanPham> SanPhams { get; set; }
+    
+        [DbFunction("MyShopEntities", "FN_DOANHTHU_THEONHOMHANG")]
+        public virtual IQueryable<FN_DOANHTHU_THEONHOMHANG_Result> FN_DOANHTHU_THEONHOMHANG(Nullable<System.DateTime> nGAYD, Nullable<System.DateTime> nGAYC)
+        {
+            var nGAYDParameter = nGAYD.HasValue ?
+                new ObjectParameter("NGAYD", nGAYD) :
+                new ObjectParameter("NGAYD", typeof(System.DateTime));
+    
+            var nGAYCParameter = nGAYC.HasValue ?
+                new ObjectParameter("NGAYC", nGAYC) :
+                new ObjectParameter("NGAYC", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.CreateQuery<FN_DOANHTHU_THEONHOMHANG_Result>("[MyShopEntities].[FN_DOANHTHU_THEONHOMHANG](@NGAYD, @NGAYC)", nGAYDParameter, nGAYCParameter);
+        }
     
         public virtual ObjectResult<Nullable<int>> SP_GetAccountByUsername(string userName, string password)
         {

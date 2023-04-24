@@ -70,6 +70,10 @@ namespace LTCSDL_QuanLyShop.BUS
             {
                 try
                 {
+                    foreach (ChiTietPN ct in dPhieuNhap.HienThiCTPNTheoID(p.IDPN))
+                    {
+                        string.IsNullOrEmpty(ct.IDPN.ToString());
+                    }    
                     dPhieuNhap.XoaPN(p);
                     return true;
                 }

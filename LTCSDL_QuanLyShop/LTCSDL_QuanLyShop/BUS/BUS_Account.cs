@@ -27,6 +27,12 @@ namespace LTCSDL_QuanLyShop.BUS
             cbb.DisplayMember = "TenTK";
             cbb.ValueMember = "IDAcc";
         }
+        public void HienThicbbLogin(ComboBox cbb)
+        {
+            cbb.DataSource = dAccount.HienThiAcc();
+            cbb.DisplayMember = "LoaiACC";
+            cbb.ValueMember = "IDAcc";
+        }
         public bool ThemAcc(Account a)
         {
             try

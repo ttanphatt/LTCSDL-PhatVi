@@ -21,6 +21,7 @@ namespace LTCSDL_QuanLyShop.DAO
                 s.IDAcc,
                 s.TenTK,
                 s.PassTK,
+                s.LoaiACC,
             }).ToList();
             return ds;
         }

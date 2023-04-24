@@ -4,22 +4,24 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e2e87cd437f64df78366b1ff51f5ecd0" Name="Diagram1">
-        <EntityTypeShape EntityType="MyShopModel.Account" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.ChiTietHoaDon" Width="1.5" PointX="12.25" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.ChiTietPN" Width="1.5" PointX="7.5" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.HoaDon" Width="1.5" PointX="10" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.KhachHang" Width="1.5" PointX="7.75" PointY="5.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.NhaCungCap" Width="1.5" PointX="3" PointY="5.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.NhanVien" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.PhieuNhap" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="MyShopModel.SanPham" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+      <Diagram DiagramId="e91368d8a1f74337b7405f92550805c8" Name="Diagram1">
+        <EntityTypeShape EntityType="MyShopModel.Account" Width="1.5" PointX="1.5" PointY="14.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.ChiTietHoaDon" Width="1.5" PointX="5.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.ChiTietPN" Width="1.5" PointX="8.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.DanhMuc" Width="1.5" PointX="0.75" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.HoaDon" Width="1.5" PointX="3" PointY="7.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.KhachHang" Width="1.5" PointX="0.75" PointY="8" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.NhaCungCap" Width="1.5" PointX="3.75" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.NhanVien" Width="1.5" PointX="3.75" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.PhieuNhap" Width="1.5" PointX="6" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="MyShopModel.SanPham" Width="1.5" PointX="3" PointY="2.375" IsExpanded="true" />
         <AssociationConnector Association="MyShopModel.FK__NhanVien__IDAcc__286302EC" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDHD__3A81B327" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDSP__398D8EEE" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDPN__36B12243" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDSP__35BCFE0A" ManuallyRouted="false" />
-        <AssociationConnector Association="MyShopModel.FK__HoaDon__IDKH__32E0915F" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDHD__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietHoa__IDSP__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDPN__398D8EEE" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__ChiTietPN__IDSP__38996AB5" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__SanPham__IDDM__30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="MyShopModel.FK__HoaDon__IDKH__35BCFE0A" ManuallyRouted="false" />
         <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNCC__2B3F6F97" ManuallyRouted="false" />
         <AssociationConnector Association="MyShopModel.FK__PhieuNhap__IDNV__2C3393D0" ManuallyRouted="false" />
       </Diagram>

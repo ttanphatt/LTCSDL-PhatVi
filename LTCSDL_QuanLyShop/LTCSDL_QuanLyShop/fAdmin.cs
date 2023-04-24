@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DevExpress.XtraCharts;
 using LTCSDL_QuanLyShop.BUS;
 
 namespace LTCSDL_QuanLyShop
@@ -19,6 +20,8 @@ namespace LTCSDL_QuanLyShop
         BUS_KhachHang bKhachHang;
         BUS_PhieuNhap bPhieuNhap;
         BUS_HoaDon bHoaDon;
+        BUS_ThongKe bThongke;
+        public int IDNV;
         public fAdmin()
         {
             InitializeComponent();
@@ -28,6 +31,7 @@ namespace LTCSDL_QuanLyShop
             bKhachHang = new BUS_KhachHang();
             bPhieuNhap = new BUS_PhieuNhap();
             bHoaDon = new BUS_HoaDon();
+            bThongke = new BUS_ThongKe();
         }
         public void HienThiSanPham()
         {
@@ -105,12 +109,31 @@ namespace LTCSDL_QuanLyShop
         {
             bKhachHang.HienThicbbKH(cbbTimTeNKHHD);
         }
+        public void HienThicbbDanhMuc()
+        {
+            bSanPham.HienThicbbDM(cbbDM);
+        }
+        public void HienThiBieuDoDT()
+        {
+            chartDoanhThuLoaiSp.DataSource = null;
+            Series series = new Series("Doanh thu loại sản phẩm", ViewType.Pie);
+            DateTime dt = dtNgayBD.Value;
+            var n1 = bThongke.DoanhThuTheoLoaiSP(dt);
+            foreach (var item in n1)
+            {
+                series.Points.Add(new SeriesPoint(item.TenDM, item.ThanhTien));
+            }
+            chartDoanhThuLoaiSp.Series.Add(series);
+            series.Label.TextPattern = "{A}: {VP: p0}";
+        }
+
         public void HienThicbbHDKH()
         {
             bKhachHang.HienThicbbKH(cbbTimTeNKHHD);
         }
             private void fAdmin_Load(object sender, EventArgs e)
         {
+            lbMaNV.Text = IDNV.ToString();
             HienThiSanPham();
             HienThicbbSanPham();
             HienThiNhanVien();
@@ -125,6 +148,14 @@ namespace LTCSDL_QuanLyShop
             HienThicbbKhachHang();
             HienThicbbHDKH();
             txtTienNhap.Text =  "0";
+            HienThiBieuDoDT();
+            HienThicbbDanhMuc();
+            bNhanVien.HienThicbbNV(cbbHTNV);
+            bAccount.HienThicbbAcc(cbbTenTK);
+            bNhanVien.HienThicbbNV(cbbNV);
+
+
+
         }
         // ==================== DGV CellClick   ===================
         private void dgvSanPham_CellClick_1(object sender, DataGridViewCellEventArgs e)
@@ -206,6 +237,7 @@ namespace LTCSDL_QuanLyShop
             nv.TenNV = txtTenNV.Text;
             nv.SDT = int.Parse(txtSDT.Text.ToString());
             nv.Luong = float.Parse(txtLuong.Text.ToString());
+            nv.IDAcc = int.Parse(cbbTenTK.SelectedValue.ToString());
             if (bNhanVien.ThemNV(nv))
             {
 
@@ -349,7 +381,7 @@ namespace LTCSDL_QuanLyShop
             pn.NgayNhap = dateNgayNhap.Value;
             pn.IDNCC = int.Parse(cbbNCC.SelectedValue.ToString());
             pn.IDNV = int.Parse(cbbNV.SelectedValue.ToString());
-            //pn.TongTien = float.Parse(txtTienNhap.Text.ToString());
+            pn.TongTien = float.Parse(txtTienNhap.Text.ToString());
             if (bPhieuNhap.SuaPN(pn))
             {
                 MessageBox.Show("Sửa phiếu nhập thành công");
@@ -422,13 +454,16 @@ namespace LTCSDL_QuanLyShop
         }
         private void btXoaPN_Click(object sender, EventArgs e)
         {
-            PhieuNhap pn = new PhieuNhap();
-            pn.IDPN = int.Parse(txtIDPN.Text);
-            if (bPhieuNhap.XoaPN(pn))
+            if(this.dgvPhieuNhap.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Xóa phiếu nhập thành công");
-                bPhieuNhap.HienThiPN(dgvPhieuNhap);
-            }
+                PhieuNhap pn = new PhieuNhap();
+                pn.IDPN = int.Parse(txtIDPN.Text);
+                if (bPhieuNhap.XoaPN(pn))
+                {
+                    bPhieuNhap.HienThiPN(dgvPhieuNhap);
+                }
+            }    
+            
             else
             {
                 MessageBox.Show("Xóa phiếu nhập thất bại");
@@ -436,17 +471,20 @@ namespace LTCSDL_QuanLyShop
         }
         private void btnXoaHD_Click(object sender, EventArgs e)
         {
-            HoaDon hd = new HoaDon();
-            int index = dgvHoaDon.CurrentCell.RowIndex;
-            hd.IDHD = int.Parse(dgvHoaDon.Rows[index].Cells[0].Value.ToString());
-            if(bHoaDon.XoaHD(hd))
+            if(this.dgvHoaDon.SelectedRows.Count == 0)
             {
-                MessageBox.Show("Xóa hóa đơn thành công");
-                bHoaDon.HienThiDSHD(dgvHoaDon);
+                //HoaDon hd = new HoaDon();
+                int index = dgvHoaDon.CurrentCell.RowIndex;
+                int ma = int.Parse(dgvHoaDon.Rows[index].Cells[0].Value.ToString());
+                if (bHoaDon.XoaHD(ma))
+                {
+                    bHoaDon.HienThiDSHD(dgvHoaDon);
+                }
             }    
+            
             else
             {
-                MessageBox.Show("Hóa đơn đã xóa rồi!!!");
+                MessageBox.Show("Xóa hóa đơn thất bại");
             }
         }
         // =========   CHI TIẾT PHIẾU NHẬP   =============
@@ -515,6 +553,48 @@ namespace LTCSDL_QuanLyShop
             cbbTimTenSP.Text = "";
         }
 
-        
+        private void dtNgayBD_ValueChanged(object sender, EventArgs e)
+        {
+            //DateTime dt = dtNgayBD.Value;
+            //Series series = new Series("Doanh thu loại sản phẩm", ViewType.Pie);
+            
+            //var n1 = bThongke.DoanhThuTheoLoaiSP(dt);
+            //foreach (var item in n1)
+            //{
+            //    series.Points.Add(new SeriesPoint(item.TenDM, item.ThanhTien));
+            //}
+            //chartDoanhThuLoaiSp.Series.Add(series);
+            //series.Label.TextPattern = "{A}: {VP: p0}";
+        }
+
+        private void btnXem_Click(object sender, EventArgs e)
+        {
+            HienThiBieuDoDT();
+        }
+
+        private void btnThoat_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Bạn có muốn thoát không???");
+            fLogin f = new fLogin();
+            this.Hide();
+            f.ShowDialog();
+        }
+
+        private void tabAdmin_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(tabAdmin.SelectedIndex == 2)
+            {
+                bNhanVien.HienThicbbNV(cbbHTNV);
+            }
+            if(tabAdmin.SelectedIndex == 1)
+            {
+                bAccount.HienThicbbAcc(cbbTenTK);
+            }
+        }
+
+        private void cbbNV_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
